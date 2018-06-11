@@ -7,6 +7,9 @@ import com.robert.vesta.util.TimeUtils;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 原子变量方式计算 id 的时间和序列号
+ */
 public class AtomicIdPopulator implements IdPopulator, ResetPopulator {
 
     class Variant {
@@ -29,6 +32,7 @@ public class AtomicIdPopulator implements IdPopulator, ResetPopulator {
         while (true) {
 
             // Save the old variant
+            // 取得并保存原有变量（包含时间和序列号字段)
             varOld = variant.get();
 
             // populate the current variant
@@ -37,6 +41,7 @@ public class AtomicIdPopulator implements IdPopulator, ResetPopulator {
 
             sequence = varOld.sequence;
 
+            // 基于原来的变量计算新的时间和序列号（和 SyncIdPopulator 、 LockIdPopulator 逻辑一致）
             if (timestamp == varOld.lastTimestamp) {
                 sequence++;
                 sequence &= idMeta.getSeqBitsMask();
@@ -52,6 +57,7 @@ public class AtomicIdPopulator implements IdPopulator, ResetPopulator {
             varNew.sequence = sequence;
             varNew.lastTimestamp = timestamp;
 
+            // 原子替换，如果被其他线程替换了则继续尝试 while(true)
             if (variant.compareAndSet(varOld, varNew)) {
                 id.setSeq(sequence);
                 id.setTime(timestamp);

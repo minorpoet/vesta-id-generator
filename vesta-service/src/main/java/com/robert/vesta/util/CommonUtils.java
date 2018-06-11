@@ -16,6 +16,11 @@ public class CommonUtils {
             return false;
     }
 
+    /**
+     * 根据环境变量判断
+     * @param key
+     * @return
+     */
     public static boolean isPropKeyOn(String key) {
 
         String prop = System.getProperty(key);

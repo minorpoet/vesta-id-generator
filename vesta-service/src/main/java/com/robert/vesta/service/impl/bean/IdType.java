@@ -1,7 +1,18 @@
 package com.robert.vesta.service.impl.bean;
 
+/**
+ * ID 类型， 最大峰值、最小粒度
+ */
 public enum IdType {
-    MAX_PEAK("max-peak"), MIN_GRANULARITY("min-granularity");
+    /**
+     * 最大峰值
+     */
+    MAX_PEAK("max-peak"),
+
+    /**
+     * 最小粒度
+     */
+    MIN_GRANULARITY("min-granularity");
 
     private String name;
 

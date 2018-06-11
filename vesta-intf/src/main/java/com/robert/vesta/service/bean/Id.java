@@ -6,11 +6,34 @@ public class Id implements Serializable {
 
     private static final long serialVersionUID = 6870931236218221183L;
 
+    /**
+     * 机器id
+     */
     private long machine;
+
+    /**
+     * 序列号
+     */
     private long seq;
+
+    /**
+     * 时间戳
+     */
     private long time;
+
+    /**
+     * 生成方式
+     */
     private long genMethod;
+
+    /**
+     * 类型
+     */
     private long type;
+
+    /**
+     * 版本
+     */
     private long version;
 
     public Id(long machine, long seq, long time, long genMethod, long type,

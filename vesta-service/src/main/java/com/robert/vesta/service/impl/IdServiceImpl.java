@@ -34,6 +34,10 @@ public class IdServiceImpl extends AbstractIdServiceImpl {
         initPopulator();
     }
 
+    /**
+     * 根据环境变量判断使用何种 id 生成方式
+     * 同步、锁或是原子变量
+     */
     public void initPopulator() {
         if(idPopulator != null){
             log.info("The " + idPopulator.getClass().getCanonicalName() + " is used.");
